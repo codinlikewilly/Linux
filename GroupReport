@@ -1,0 +1,17 @@
+#!/bin/bash
+output="output.txt"
+
+echo "Group Report">$output
+echo "Group GID Count">>$output
+echo "===== === =====">>$output
+
+for i in $@
+do
+groupid=(grep ^$i /etc/group | cut -d':' -f3)
+
+count=(grep -c $groupid /etc/passwd)
+echo "$i $groupid $count">>output
+
+done
+
+cat output.txt
