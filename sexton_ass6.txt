@@ -1,0 +1,56 @@
+!/bin/bash
+
+function squeeze()
+{
+$size=1000000
+$days=10
+while getopts s:d o
+do 	case "$o" in
+	s)$size=$OPTARG;;
+	d)$days=$OPTARG;;
+	[?]) echo >&2 "Usage: $0 [-s] [-d] directory
+	shift $((OPTIND -1))
+	exit 1;;
+	
+$target = find / -size $size -atime $days
+	
+esac
+done
+
+ }
+
+function squeeze_file()
+{
+	local file=$target
+	if ! [ -f $file ]
+	then
+		return
+	fi
+	while true
+	do
+	   echo "For $file: m, o, l, c, or r?"
+	   	read choice
+		case $choice in
+		[mM]*) more $file ;;
+		[cC]*) break ;;
+		[oO]*) od -c $file | more ;;
+		[lL]*) ls -l $file;;
+		[rR]*) /bin/rm $filebreak ;;
+		*) echo "huh?" ;;
+		esac
+		done
+		}
+function delete_in_dir()
+{
+local file
+local dir=$
+for file in $dir/*
+do
+	process_file $file
+	done
+}
+
+for dir
+do
+	delete_in_dir $dir
+done
